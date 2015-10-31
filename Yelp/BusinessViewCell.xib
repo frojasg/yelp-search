@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="99" id="KGk-i7-Jjw" customClass="BusinessViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="99"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="400" height="98.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BdS-Ly-TB3">
+                        <rect key="frame" x="8" y="8" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="80" id="9Hm-zf-42O"/>
+                            <constraint firstAttribute="height" constant="70" id="BSx-Ap-7Tz"/>
+                            <constraint firstAttribute="width" constant="80" id="qar-gi-Hu9"/>
+                            <constraint firstAttribute="width" constant="70" id="s9S-9p-n6T"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="9Hm-zf-42O"/>
+                                <exclude reference="qar-gi-Hu9"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Business name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QXY-9c-Cmd">
+                        <rect key="frame" x="86" y="8" width="271" height="14.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="0.8mi" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mg-vK-w6T">
+                        <rect key="frame" x="365" y="9" width="27" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2824 Jones St, North Beatch/Telegraph Hill" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6db-rC-bdv">
+                        <rect key="frame" x="83" y="54" width="307" height="12"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="10"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="British, Fish &amp; Chips, Sea food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wYh-s8-GKo">
+                        <rect key="frame" x="83" y="71" width="307" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jf8-x5-Ft9">
+                        <rect key="frame" x="83" y="27" width="84" height="17"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="17" id="UwI-kZ-eyG"/>
+                            <constraint firstAttribute="height" constant="17" id="UwP-8K-dT8"/>
+                            <constraint firstAttribute="width" constant="84" id="Yha-Pz-B3R"/>
+                            <constraint firstAttribute="width" constant="84" id="dgA-L2-9iW"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="fXD-6j-zV3"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="84" id="nen-ct-JED"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="UwP-8K-dT8"/>
+                                <exclude reference="Yha-Pz-B3R"/>
+                                <exclude reference="fXD-6j-zV3"/>
+                                <exclude reference="nen-ct-JED"/>
+                            </mask>
+                        </variation>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="1367 Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17O-gU-jKF">
+                        <rect key="frame" x="172" y="30" width="66" height="12"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="wYh-s8-GKo" secondAttribute="bottom" constant="10" id="2E5-Ln-WhZ"/>
+                    <constraint firstItem="BdS-Ly-TB3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="2TF-db-adU"/>
+                    <constraint firstAttribute="trailing" secondItem="6db-rC-bdv" secondAttribute="trailing" constant="10" id="7Au-1e-m1G"/>
+                    <constraint firstItem="17O-gU-jKF" firstAttribute="centerY" secondItem="jf8-x5-Ft9" secondAttribute="centerY" id="9Oh-bv-qgv"/>
+                    <constraint firstAttribute="trailing" secondItem="3mg-vK-w6T" secondAttribute="trailing" constant="8" id="A9c-Ce-meo"/>
+                    <constraint firstAttribute="trailing" secondItem="wYh-s8-GKo" secondAttribute="trailing" constant="10" id="CbE-sR-ZZ6"/>
+                    <constraint firstItem="3mg-vK-w6T" firstAttribute="leading" secondItem="QXY-9c-Cmd" secondAttribute="trailing" constant="8" id="Db4-xN-c11"/>
+                    <constraint firstItem="17O-gU-jKF" firstAttribute="leading" secondItem="jf8-x5-Ft9" secondAttribute="trailing" constant="11" id="EZC-D6-OCR"/>
+                    <constraint firstItem="17O-gU-jKF" firstAttribute="leading" secondItem="jf8-x5-Ft9" secondAttribute="trailing" constant="5" id="JBn-RW-ig0"/>
+                    <constraint firstItem="jf8-x5-Ft9" firstAttribute="top" secondItem="QXY-9c-Cmd" secondAttribute="bottom" constant="5" id="LTX-6e-b9y"/>
+                    <constraint firstItem="wYh-s8-GKo" firstAttribute="leading" secondItem="BdS-Ly-TB3" secondAttribute="trailing" constant="5" id="MAv-cQ-5B3"/>
+                    <constraint firstItem="jf8-x5-Ft9" firstAttribute="leading" secondItem="BdS-Ly-TB3" secondAttribute="trailing" constant="5" id="QLH-Bu-wFS"/>
+                    <constraint firstItem="jf8-x5-Ft9" firstAttribute="top" secondItem="QXY-9c-Cmd" secondAttribute="bottom" constant="5" id="T9r-oZ-PWm"/>
+                    <constraint firstItem="QXY-9c-Cmd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Tss-Wc-cV7"/>
+                    <constraint firstItem="17O-gU-jKF" firstAttribute="leading" secondItem="jf8-x5-Ft9" secondAttribute="trailing" constant="5" id="aav-ki-DWC"/>
+                    <constraint firstItem="3mg-vK-w6T" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="azV-39-CRK"/>
+                    <constraint firstItem="jf8-x5-Ft9" firstAttribute="leading" secondItem="BdS-Ly-TB3" secondAttribute="trailing" constant="5" id="dhE-AY-UKr"/>
+                    <constraint firstItem="6db-rC-bdv" firstAttribute="leading" secondItem="BdS-Ly-TB3" secondAttribute="trailing" constant="5" id="fVf-Cc-1sV"/>
+                    <constraint firstItem="3mg-vK-w6T" firstAttribute="centerY" secondItem="QXY-9c-Cmd" secondAttribute="centerY" id="gTG-n2-8Yr"/>
+                    <constraint firstItem="6db-rC-bdv" firstAttribute="top" secondItem="jf8-x5-Ft9" secondAttribute="bottom" constant="10" id="h4W-d8-8Kj"/>
+                    <constraint firstItem="BdS-Ly-TB3" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="h5d-fR-FeR"/>
+                    <constraint firstItem="17O-gU-jKF" firstAttribute="top" secondItem="QXY-9c-Cmd" secondAttribute="bottom" constant="7.5" id="nDy-Ny-ZnE"/>
+                    <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="BdS-Ly-TB3" secondAttribute="bottom" constant="10" id="qfJ-16-rzj"/>
+                    <constraint firstItem="QXY-9c-Cmd" firstAttribute="leading" secondItem="BdS-Ly-TB3" secondAttribute="trailing" constant="8" id="uNh-1w-4sU"/>
+                    <constraint firstItem="wYh-s8-GKo" firstAttribute="top" secondItem="6db-rC-bdv" secondAttribute="bottom" constant="5" id="zCw-Jq-phB"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="LTX-6e-b9y"/>
+                        <exclude reference="QLH-Bu-wFS"/>
+                        <exclude reference="EZC-D6-OCR"/>
+                        <exclude reference="JBn-RW-ig0"/>
+                        <exclude reference="nDy-Ny-ZnE"/>
+                        <exclude reference="azV-39-CRK"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="addressLabel" destination="6db-rC-bdv" id="5ih-MH-vwX"/>
+                <outlet property="businessImageView" destination="BdS-Ly-TB3" id="duh-1A-bbg"/>
+                <outlet property="businessNameLabel" destination="QXY-9c-Cmd" id="68X-mA-5Jo"/>
+                <outlet property="categoriesLabel" destination="wYh-s8-GKo" id="try-Hz-Inm"/>
+                <outlet property="distanceLabel" destination="3mg-vK-w6T" id="tpq-24-UDN"/>
+                <outlet property="reviewImageView" destination="jf8-x5-Ft9" id="Agu-U7-pE8"/>
+                <outlet property="reviewsLabel" destination="17O-gU-jKF" id="0aC-Gw-usJ"/>
+            </connections>
+            <point key="canvasLocation" x="380" y="434.5"/>
+        </tableViewCell>
+    </objects>
+</document>
