@@ -9,9 +9,11 @@
 #import "MainViewController.h"
 #import "YelpBusiness.h"
 #import "BusinessViewCell.h"
+#import "FilterViewController.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *businesses;
 
 @end
@@ -25,6 +27,15 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
+
+    self.title= @"Yelp";
+    UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(showFilter)];
+    self.navigationItem.leftBarButtonItem = filterButton;
+
+    self.searchBar = [[UISearchBar alloc] init];
+    self.searchBar.delegate = self;
+    [self.searchBar sizeToFit];
+    self.navigationItem.titleView = self.searchBar;
 
     [self.tableView registerNib:[UINib nibWithNibName:@"BusinessViewCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
 
@@ -59,8 +70,16 @@
     [cell setBusiness: business];
 
     return cell;
-
 }
 
+#pragma mark - Private Methods
+
+- (void) showFilter {
+    FilterViewController *fvc = [[FilterViewController alloc] init];
+
+    UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
+    [self presentViewController:nvc animated:YES completion:nil];
+
+}
 
 @end
