@@ -9,12 +9,14 @@
 #import "MainViewController.h"
 #import "YelpBusiness.h"
 #import "BusinessViewCell.h"
-#import "FilterViewController.h"
+#import "FiltersViewController.h"
+#import "YelpFilters.h"
 
-@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+@interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (strong, nonatomic) NSArray *businesses;
+@property (strong, nonatomic) YelpFilters *filters;
 
 @end
 
@@ -27,6 +29,7 @@
     self.tableView.dataSource = self;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 100;
+    self.filters = [[YelpFilters alloc] init];
 
     self.title= @"Yelp";
     UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Filter" style:UIBarButtonItemStylePlain target:self action:@selector(showFilter)];
@@ -39,10 +42,14 @@
 
     [self.tableView registerNib:[UINib nibWithNibName:@"BusinessViewCell" bundle:nil] forCellReuseIdentifier:@"BusinessCell"];
 
-    
-    [YelpBusiness searchWithTerm:@"Restaurants"
+    [self search: @"Restaurant"];
+
+}
+
+- (void) search: (NSString*) term {
+    [YelpBusiness searchWithTerm: term
                         sortMode:YelpSortModeBestMatched
-                      categories:@[@"burgers"]
+                      categories: [self.filters categoryCodes]
                            deals:NO
                       completion:^(NSArray *businesses, NSError *error) {
                           self.businesses = businesses;
@@ -51,7 +58,9 @@
                               NSLog(@"%@", business);
                           }
                       }];
+
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -65,17 +74,26 @@
 
     BusinessViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:@"BusinessCell"];
 
-    YelpBusiness *business = self.businesses[indexPath.row
-                                             ];
+    YelpBusiness *business = self.businesses[indexPath.row];
     [cell setBusiness: business];
 
     return cell;
 }
 
+#pragma mark - Filters delegate methods
+
+- (void)filtersViewController: (FiltersViewController*) filtersViewController didChangeFilters:(YelpFilters *) filters {
+    self.filters = filters;
+    [self search: @"Restaurant"];
+}
+
+
 #pragma mark - Private Methods
 
 - (void) showFilter {
-    FilterViewController *fvc = [[FilterViewController alloc] init];
+    FiltersViewController *fvc = [[FiltersViewController alloc] init];
+    fvc.delegate = self;
+    fvc.filters = self.filters;
 
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
