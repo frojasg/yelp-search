@@ -52,6 +52,11 @@
     }
 }
 
+-(NSNumber*) distance {
+    YelpFilter *filter = self.filters[1];
+    return [filter.selectedData anyObject][@"code"];
+}
+
 #pragma mark - Copy
 
 -(id)copyWithZone:(NSZone *)zone
@@ -81,7 +86,7 @@
               ],
              [[YelpSingleOptionFilter alloc] initWithData:
               @[
-                @{@"name": @"Auto", @"code": @(0), @"selected": @(YES)},
+                @{@"name": @"Auto", @"code": @(NSIntegerMax), @"selected": @(YES)},
                 @{@"name": @"0.3 miles", @"code": @(0.3)},
                 @{@"name": @"1 mile", @"code": @(1)},
                 @{@"name": @"5 miles", @"code": @(5)},

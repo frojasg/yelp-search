@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSURL *imageUrl;
 @property (strong, nonatomic) NSString *categories;
 @property (strong, nonatomic) NSString *distance;
+@property (strong, nonatomic) NSNumber *distanceMiles;
 @property (strong, nonatomic) NSURL *ratingImageUrl;
 @property (strong, nonatomic) NSNumber *reviewCount;
 
@@ -30,6 +31,7 @@
               sortMode:(YelpSortMode)sortMode
             categories:(NSArray *)categories
                  deals:(BOOL)hasDeal
+              distance: (NSNumber*) distance
             completion:(void (^)(NSArray *businesses, NSError *error))completion;
 
 @end

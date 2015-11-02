@@ -21,6 +21,7 @@
 -(YelpFilter*) filter: (NSInteger) section;
 -(NSArray*)categoryCodes;
 -(YelpSortMode) sortMode;
+-(NSNumber*) distance;
 -(BOOL) deals;
 
 @end

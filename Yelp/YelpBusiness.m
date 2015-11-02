@@ -48,7 +48,11 @@
         NSNumber *distanceMeters = dict[@"distance"];
         if (distanceMeters) {
             float milesPerMeter = 0.000621371;
-            _distance = [NSString stringWithFormat:@"%.2f mi", milesPerMeter * [distanceMeters doubleValue]];
+            _distanceMiles = [NSNumber numberWithFloat: milesPerMeter * [distanceMeters doubleValue]];
+            _distance = [NSString stringWithFormat:@"%.2f mi", [_distanceMiles doubleValue]];
+
+        } else {
+            _distanceMiles = [NSNumber numberWithInt:0];
         }
 
         NSString *ratingImageUrlString = dict[@"rating_img_url_large"];
@@ -78,13 +82,20 @@
               sortMode:(YelpSortMode)sortMode
             categories:(NSArray *)categories
                  deals:(BOOL)hasDeal
+              distance: (NSNumber*) distance
             completion:(void (^)(NSArray *businesses, NSError *error))completion {
 
     [[YelpClient sharedInstance] searchWithTerm:term
                                        sortMode:sortMode
                                      categories:categories
                                           deals:hasDeal
-                                     completion:completion];
+                                     completion:^(NSArray *businesses, NSError *error) {
+                                         if(businesses) {
+                                             NSArray *list = [businesses filteredArrayUsingPredicate: [NSPredicate predicateWithFormat: @"distanceMiles <= %@" argumentArray: @[distance]]];
+                                             businesses = list;
+                                         }
+                                         completion(businesses, error);
+                                     }];
 }
 
 - (NSString *)description {

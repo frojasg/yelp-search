@@ -53,6 +53,7 @@
                         sortMode: [self.filters sortMode]
                       categories: [self.filters categoryCodes]
                            deals: [self.filters deals]
+                        distance: [self.filters distance]
                       completion:^(NSArray *businesses, NSError *error) {
                           self.businesses = businesses;
                           [self.tableView reloadData];
