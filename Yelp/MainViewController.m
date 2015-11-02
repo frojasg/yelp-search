@@ -48,9 +48,9 @@
 
 - (void) search: (NSString*) term {
     [YelpBusiness searchWithTerm: term
-                        sortMode:YelpSortModeBestMatched
+                        sortMode: [self.filters sortMode]
                       categories: [self.filters categoryCodes]
-                           deals:NO
+                           deals: [self.filters deals]
                       completion:^(NSArray *businesses, NSError *error) {
                           self.businesses = businesses;
                           [self.tableView reloadData];
@@ -93,11 +93,10 @@
 - (void) showFilter {
     FiltersViewController *fvc = [[FiltersViewController alloc] init];
     fvc.delegate = self;
-    fvc.filters = self.filters;
+    fvc.yelpFilters = [self.filters copy];
 
     UINavigationController * nvc = [[UINavigationController alloc] initWithRootViewController:fvc];
     [self presentViewController:nvc animated:YES completion:nil];
-
 }
 
 @end

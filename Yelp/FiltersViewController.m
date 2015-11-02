@@ -3,7 +3,7 @@
 //  Yelp
 //
 //  Created by Francisco Rojas Gallegos on 10/31/15.
-//  Copyright © 2015 codepath. All rights reserved.
+//  Copyright © 2015 frojasg. All rights reserved.
 //
 
 #import "FiltersViewController.h"
@@ -11,11 +11,8 @@
 
 @interface FiltersViewController () <UITableViewDataSource, UITableViewDelegate, SwitchCellDelegate>
 
-@property (weak, nonatomic) IBOutlet UITableView *categoriesTableView;
-@property (strong, nonatomic) NSArray *categories;
-@property (strong, nonatomic) NSMutableSet *selectedCategories;
+@property (weak, nonatomic) IBOutlet UITableView *filtersTableView;
 
--(void) initCategories;
 @end
 
 @implementation FiltersViewController
@@ -23,8 +20,6 @@
 - (id) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.selectedCategories  = [NSMutableSet set];
-        [self initCategories];
 
     }
     return self;
@@ -33,12 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.categoriesTableView.delegate = self;
-    self.categoriesTableView.dataSource = self,
-    [self.categoriesTableView registerNib:[UINib nibWithNibName:@"SwitchCell" bundle:nil] forCellReuseIdentifier:@"SwitchCell"];
+    self.filtersTableView.delegate = self;
+    self.filtersTableView.dataSource = self,
+    [self.filtersTableView registerNib:[UINib nibWithNibName:@"SwitchCell" bundle:nil] forCellReuseIdentifier:@"SwitchCell"];
 
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(onCancelButton)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Apply" style:UIBarButtonItemStylePlain target:self action:@selector(onApplyButton)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Search" style:UIBarButtonItemStylePlain target:self action:@selector(onApplyButton)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,38 +41,47 @@
 }
 
 #pragma mark - Setter method
-- (void) setFilters:(YelpFilters*) filters {
-    _filters = filters;
-    self.selectedCategories = [filters.categories mutableCopy];
+- (void) setYelpFilters:(YelpFilters*) filters {
+    _yelpFilters = filters;
 }
 
 #pragma mark - Table View Data Source methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.categories count];
+    return [[self.yelpFilters filter:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    SwitchCell  *cell = [self.categoriesTableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
+    SwitchCell  *cell = [self.filtersTableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
 
-    [cell setOn:[self.selectedCategories containsObject:self.categories[indexPath.row]]];
-    cell.titleLabel.text = self.categories[indexPath.row][@"name"];
+    YelpFilter *filter = [self.yelpFilters filter: indexPath.section];
+
+    [cell setOn:[filter isSelected:indexPath.row]];
+    cell.titleLabel.text = [filter name: indexPath.row];
     cell.delegator = self;
 
     return cell;
 }
 
-#pragma mark - Switch Cell Delegate method
-- (void) switchCell: (SwitchCell *) cell didUpdateValue:(BOOL) value {
-    NSIndexPath *indexPath = [self.categoriesTableView indexPathForCell:cell];
-
-    if (value) {
-        [self.selectedCategories addObject: self.categories[indexPath.row]];
-    } else {
-        [self.selectedCategories removeObject:self.categories[indexPath.row]];
-    }
-
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.yelpFilters sectionsCount];
+}
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    return [self.yelpFilters filter:section].title;
 }
 
+#pragma mark - Switch Cell Delegate method
+- (void) switchCell: (SwitchCell *) cell didUpdateValue:(BOOL) value {
+    NSIndexPath *indexPath = [self.filtersTableView indexPathForCell:cell];
+
+    YelpFilter *filter = [self.yelpFilters filter:indexPath.section];
+    if (value) {
+        [filter select:indexPath.row];
+    } else {
+        [filter unselect:indexPath.row];
+    }
+
+    [self.filtersTableView reloadSections:[NSIndexSet indexSetWithIndex: indexPath.section] withRowAnimation:NO];
+}
 
 #pragma mark - Private Methods
 
@@ -85,18 +89,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void) onApplyButton {
-    self.filters.categories = [self.selectedCategories copy];
-    [self.delegate filtersViewController:self didChangeFilters: self.filters];
-
+    [self.delegate filtersViewController:self didChangeFilters: self.yelpFilters];
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-- (void) initCategories {
-    self.categories = @[
-                        @{@"name": @"Mexican", @"code": @"mexican"},
-                        @{@"name": @"Burgers", @"code": @"burgers"},
-                        @{@"name": @"Cafes", @"code": @"cafes"},
-                        @{@"name": @"Cheesesteaks", @"code": @"cheesesteaks"},
-                        ];
 }
 
 @end

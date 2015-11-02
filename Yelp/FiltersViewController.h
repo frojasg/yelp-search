@@ -20,6 +20,6 @@
 @interface FiltersViewController : UIViewController
 
 @property (nonatomic, weak) id<FiltersViewControllerDelegate> delegate;
-@property (nonatomic, weak) YelpFilters *filters;
+@property (nonatomic, strong) YelpFilters *yelpFilters;
 
 @end
