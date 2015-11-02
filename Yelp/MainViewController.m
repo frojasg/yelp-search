@@ -11,6 +11,7 @@
 #import "BusinessViewCell.h"
 #import "FiltersViewController.h"
 #import "YelpFilters.h"
+#import "MBProgressHUD.h"
 
 @interface MainViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, FiltersViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -49,6 +50,7 @@
 }
 
 - (void) search {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [YelpBusiness searchWithTerm: self.filters.term
                         sortMode: [self.filters sortMode]
                       categories: [self.filters categoryCodes]
@@ -57,6 +59,7 @@
                       completion:^(NSArray *businesses, NSError *error) {
                           self.businesses = businesses;
                           [self.tableView reloadData];
+                          [MBProgressHUD hideHUDForView:self.view animated:YES];
                           for (YelpBusiness *business in businesses) {
                               NSLog(@"%@", business);
                           }

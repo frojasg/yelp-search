@@ -18,12 +18,18 @@
 
 @interface SwitchCell : UITableViewCell
 
+typedef NS_ENUM(NSInteger, SwitchCellType) {
+    SwitchCellTypeToggle = 0,
+    SwitchCellTypeDropDown = 1,
+    SwitchCellTypeCheck = 2
+};
+
 @property (weak, nonatomic) id<SwitchCellDelegate> delegator;
 @property (assign, nonatomic) BOOL on;
+@property (assign, nonatomic) SwitchCellType type;
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 -(void) setOn:(BOOL)on;
 -(void) setOn:(BOOL)on animated: (BOOL) animated;
-
 
 @end
