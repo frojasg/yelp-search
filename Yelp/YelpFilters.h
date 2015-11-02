@@ -14,6 +14,8 @@
 @interface YelpFilters : NSObject
 
 @property (strong, nonatomic) NSArray* filters;
+@property (strong, nonatomic) NSString* term;
+@property (strong, nonatomic) NSString* defaultTerm;
 
 -(NSInteger) sectionsCount;
 -(YelpFilter*) filter: (NSInteger) section;

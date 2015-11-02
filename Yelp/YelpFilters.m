@@ -44,11 +44,21 @@
     return [filter.selectedData  count] > 0;
 }
 
+- (NSString*) term {
+    if([_term length]== 0) {
+        return self.defaultTerm;
+    } else {
+        return _term;
+    }
+}
+
 #pragma mark - Copy
 
 -(id)copyWithZone:(NSZone *)zone
 {
     YelpFilters *another = [[YelpFilters alloc] init];
+    another.term = [self.term copy];
+    another.defaultTerm = [self.defaultTerm copy];
     for (int i = 0; i < [self.filters count]; i++) {
         YelpFilter *filter = another.filters[i];
         YelpFilter *origin = self.filters[i];
