@@ -68,6 +68,7 @@
         YelpFilter *filter = another.filters[i];
         YelpFilter *origin = self.filters[i];
         filter.selectedData = [origin.selectedData mutableCopy];
+        filter.openFlag = origin.openFlag;
     }
     return another;
 }
@@ -86,7 +87,7 @@
               ],
              [[YelpSingleOptionFilter alloc] initWithData:
               @[
-                @{@"name": @"Auto", @"code": @(NSIntegerMax), @"selected": @(YES)},
+                @{@"name": @"Best match", @"code": @(NSIntegerMax), @"selected": @(YES)},
                 @{@"name": @"0.3 miles", @"code": @(0.3)},
                 @{@"name": @"1 mile", @"code": @(1)},
                 @{@"name": @"5 miles", @"code": @(5)},
@@ -116,6 +117,7 @@
 
 @end
 
+
 @implementation YelpFilter
 
 #pragma mark - Constructor
@@ -124,6 +126,7 @@
     if(self) {
         self.data = [data copy];
         self.selectedData = [NSMutableSet set];
+        self.openFlag = YES;
         for (NSDictionary *obj in data) {
             if([obj objectForKey:@"selected"]) {
                 [self.selectedData addObject: obj];
@@ -135,6 +138,19 @@
 }
 
 #pragma mark - public methods
+
+-(void) open {
+}
+
+-(void) close {
+}
+-(void) toggle {
+}
+
+-(BOOL) isOpen {
+    return self.openFlag;
+}
+
 -(void) select:(NSInteger) index {
     [self.selectedData addObject:self.data[index]];
 }
@@ -165,6 +181,14 @@
 
 @implementation YelpSingleOptionFilter
 
+#pragma mark - Constructor
+-(id) initWithData:(NSArray *)data title: (NSString*) title {
+    self = [super initWithData:data title:title];
+    if(self) {
+        self.openFlag = NO;
+    }
+    return self;
+}
 
 #pragma mark - public methods
 -(void) select:(NSInteger) index {
@@ -178,6 +202,46 @@
 -(void) unselect:(NSInteger) index {
     // we don't do anything
 }
+
+-(void) open {
+    self.openFlag = YES;
+}
+
+-(void) close {
+    self.openFlag = NO;
+}
+-(void) toggle {
+    self.openFlag = !self.openFlag;
+}
+
+-(NSString*) name: (NSInteger) row {
+    if(!self.openFlag && row == 0) {
+        return self.selectedData.anyObject[@"name"];
+
+    } else {
+        return self.data[row][@"name"];
+    }
+}
+
+-(BOOL) isSelected: (NSInteger) row {
+    if(!self.openFlag && row == 0) {
+        return YES;
+    } else {
+        return [self.selectedData containsObject:self.data[row]];
+    }
+
+}
+
+
+-(NSInteger) count {
+    if (self.openFlag) {
+        return [self.data count];
+    } else {
+        return 1;
+    }
+}
+
+
 
 
 @end

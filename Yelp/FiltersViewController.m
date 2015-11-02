@@ -83,6 +83,19 @@
     [self.filtersTableView reloadSections:[NSIndexSet indexSetWithIndex: indexPath.section] withRowAnimation:NO];
 }
 
+#pragma mark - UITableview Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    YelpFilter *filter = [self.yelpFilters filter: indexPath.section];
+    [filter toggle];
+    [self.filtersTableView reloadSections:[NSIndexSet indexSetWithIndex: indexPath.section] withRowAnimation:NO];
+}
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    YelpFilter *filter = [self.yelpFilters filter: indexPath.section];
+    [filter close];
+    [self.filtersTableView reloadSections:[NSIndexSet indexSetWithIndex: indexPath.section] withRowAnimation:NO];
+}
+
+
 #pragma mark - Private Methods
 
 - (void) onCancelButton {
