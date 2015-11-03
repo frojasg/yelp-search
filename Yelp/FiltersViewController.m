@@ -53,8 +53,8 @@
     SwitchCell  *cell = [self.filtersTableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
 
     YelpFilter *filter = [self.yelpFilters filter: indexPath.section];
-    cell.type = [self cellType: filter];
     cell.titleLabel.text = [filter name: indexPath.row];
+    cell.type = [self cellType: filter index: indexPath.row];
     [cell setOn:[filter isSelected:indexPath.row]];
     cell.delegator = self;
 
@@ -85,11 +85,14 @@
 #pragma mark - UITableview Delegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     YelpFilter *filter = [self.yelpFilters filter: indexPath.section];
-    if (filter.class == YelpSingleOptionFilter.self && [filter isOpen]) {
-        SwitchCell *cell =  [self.filtersTableView cellForRowAtIndexPath:indexPath];
+    SwitchCell *cell =  [self.filtersTableView cellForRowAtIndexPath:indexPath];
+    if (cell.type == SwitchCellTypeCheck) {
         [self switchCell:cell didUpdateValue:!cell.on];
     }
-    [filter toggle];
+    if (cell.type != SwitchCellTypeToggle) {
+        [filter toggle];
+    }
+
     [self.filtersTableView reloadSections:[NSIndexSet indexSetWithIndex: indexPath.section] withRowAnimation:NO];
 }
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -101,7 +104,7 @@
 
 #pragma mark - Private Methods
 
-- (SwitchCellType) cellType: (YelpFilter*) filter {
+- (SwitchCellType) cellType: (YelpFilter*) filter index: (NSInteger) index {
     if (filter.class == YelpSingleOptionFilter.self) {
         if([filter isOpen]) {
             return SwitchCellTypeCheck;
@@ -109,7 +112,11 @@
             return SwitchCellTypeDropDown;
         }
     } else {
-        return SwitchCellTypeToggle;
+        if([filter isOpen] && [filter count] > 1 && [filter count] - 1 == index) {
+            return SwitchCellTypeShowMore;
+        } else {
+            return SwitchCellTypeToggle;
+        }
     }
 }
 

@@ -21,7 +21,8 @@
 typedef NS_ENUM(NSInteger, SwitchCellType) {
     SwitchCellTypeToggle = 0,
     SwitchCellTypeDropDown = 1,
-    SwitchCellTypeCheck = 2
+    SwitchCellTypeCheck = 2,
+    SwitchCellTypeShowMore = 3
 };
 
 @property (weak, nonatomic) id<SwitchCellDelegate> delegator;

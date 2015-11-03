@@ -28,11 +28,12 @@
 
 @interface YelpFilter : NSObject
 @property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) NSArray *subdata;
 @property (strong, nonatomic) NSMutableSet *selectedData;
 @property (strong, nonatomic) NSString* title;
 @property (assign, nonatomic) BOOL openFlag;
 
--(id) initWithData:(NSArray *) data title:(NSString*) title;
+-(id) initWithData:(NSArray *) data subdata: (NSArray *) subdata title:(NSString*) title;
 -(void) select:(NSInteger) index;
 -(void) unselect:(NSInteger) index;
 -(NSInteger) count;

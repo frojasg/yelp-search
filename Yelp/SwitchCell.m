@@ -28,10 +28,8 @@
     self.toggleSwitch.offLabel.textColor = [UIColor whiteColor];
     self.toggleSwitch.offLabel.text = @"OFF";
     self.toggleSwitch.onLabel.text = @"ON";
-    self.toggleSwitch.inactiveColor = [UIColor colorWithRed:(229/255.0f) green:(229/255.0f) blue:(225/255.0f) alpha:1.00f];
-    self.toggleSwitch.onTintColor = [UIColor colorWithRed:(59/255.0f) green:(101/255.0f) blue:(167/255.0f) alpha:1.00f];
-    self.toggleSwitch.activeColor = self.toggleSwitch.inactiveColor;
-    self.toggleSwitch.borderColor = self.toggleSwitch.inactiveColor;
+    self.toggleSwitch.inactiveColor = [UIColor colorWithRed:(229.0f/255.0f) green:(229.0f/255.0f) blue:(225.0f/255.0f) alpha:1.00f];
+    self.toggleSwitch.onTintColor = [UIColor colorWithRed:(59.0f/255.0f) green:(101.0f/255.0f) blue:(167.0f/255.0f) alpha:1.00f];
     [self.switchView addSubview:self.toggleSwitch];
 }
 
@@ -59,6 +57,10 @@
         case SwitchCellTypeToggle:
             [self.toggleSwitch setOn: on animated:animated];
             break;
+        case SwitchCellTypeShowMore:
+            break;
+        default:
+            break;
     }
 }
 
@@ -72,15 +74,26 @@
                 self.toggleSwitch.hidden = YES;
                 self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"circle"]];
             }
+            self.accessoryType = UITableViewCellAccessoryNone;
             break;
         case SwitchCellTypeDropDown:
             self.toggleSwitch.hidden = YES;
             self.accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed: @"arrow_down"]];
+            self.accessoryType = UITableViewCellAccessoryNone;
             break;
         case SwitchCellTypeToggle:
             self.toggleSwitch.hidden = NO;
             self.accessoryView = nil;
+            self.accessoryType = UITableViewCellAccessoryNone;
             break;
+        case SwitchCellTypeShowMore:
+            self.toggleSwitch.hidden = YES;
+            self.titleLabel.text = @"See More";
+            self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+        default:
+            break;
+
     }
 
 }
