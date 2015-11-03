@@ -7,9 +7,12 @@
 //
 
 #import "SwitchCell.h"
+#import "SevenSwitch.h"
 
 @interface SwitchCell ()
-@property (weak, nonatomic) IBOutlet UISwitch *toggleSwitch;
+@property (strong, nonatomic) IBOutlet SevenSwitch *toggleSwitch;
+@property (weak, nonatomic) IBOutlet UIView *switchView;
+
 - (IBAction)switchValueChanged:(id)sender;
 @end
 
@@ -17,6 +20,19 @@
 
 - (void)awakeFromNib {
     self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+    self.toggleSwitch = [[SevenSwitch alloc] initWithFrame:CGRectMake(0, 0, 60, 31)];
+    [self.toggleSwitch addTarget:self action:@selector(switchValueChanged:) forControlEvents:UIControlEventValueChanged];
+    self.toggleSwitch.thumbImage = [UIImage imageNamed:@"yelp"];
+    self.toggleSwitch.onLabel.textColor = [UIColor whiteColor];
+    self.toggleSwitch.offLabel.textColor = [UIColor whiteColor];
+    self.toggleSwitch.offLabel.text = @"OFF";
+    self.toggleSwitch.onLabel.text = @"ON";
+    self.toggleSwitch.inactiveColor = [UIColor colorWithRed:(229/255.0f) green:(229/255.0f) blue:(225/255.0f) alpha:1.00f];
+    self.toggleSwitch.onTintColor = [UIColor colorWithRed:(59/255.0f) green:(101/255.0f) blue:(167/255.0f) alpha:1.00f];
+    self.toggleSwitch.activeColor = self.toggleSwitch.inactiveColor;
+    self.toggleSwitch.borderColor = self.toggleSwitch.inactiveColor;
+    [self.switchView addSubview:self.toggleSwitch];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

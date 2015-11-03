@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -15,40 +16,38 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rrv-95-veh">
-                        <rect key="frame" x="8" y="11.5" width="250" height="20.5"/>
+                        <rect key="frame" x="8" y="11.5" width="42" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D1l-58-Lyv">
-                        <rect key="frame" x="266" y="6" width="51" height="31"/>
-                        <color key="onTintColor" red="0.23137254900000001" green="0.39607843139999999" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                        <connections>
-                            <action selector="switchValueChanged:" destination="KGk-i7-Jjw" eventType="valueChanged" id="zjE-vh-D8c"/>
-                        </connections>
-                    </switch>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFn-TX-GeD">
+                        <rect key="frame" x="252" y="6" width="60" height="31"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="31" id="dWC-qT-uz6"/>
+                            <constraint firstAttribute="width" constant="60" id="w3J-lQ-2OU"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="D1l-58-Lyv" firstAttribute="leading" secondItem="rrv-95-veh" secondAttribute="trailing" constant="8" id="AVN-Mj-0Th"/>
                     <constraint firstItem="rrv-95-veh" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="IWx-B6-e4r"/>
-                    <constraint firstAttribute="trailing" secondItem="D1l-58-Lyv" secondAttribute="trailing" constant="5" id="JQ1-KD-0CQ"/>
                     <constraint firstAttribute="bottom" secondItem="rrv-95-veh" secondAttribute="bottom" constant="8" id="KaE-Ld-7d0"/>
-                    <constraint firstItem="D1l-58-Lyv" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Pl5-uO-xtL"/>
+                    <constraint firstItem="GFn-TX-GeD" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="Kbp-S9-gh0"/>
+                    <constraint firstItem="GFn-TX-GeD" firstAttribute="centerY" secondItem="rrv-95-veh" secondAttribute="centerY" id="Kdw-ma-Vd8"/>
                     <constraint firstItem="rrv-95-veh" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="ZHG-TK-d3y"/>
-                    <constraint firstItem="D1l-58-Lyv" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="a7a-W8-xuM"/>
                     <constraint firstItem="rrv-95-veh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="tsK-Me-wap"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="KaE-Ld-7d0"/>
                         <exclude reference="tsK-Me-wap"/>
-                        <exclude reference="a7a-W8-xuM"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>
             <connections>
+                <outlet property="switchView" destination="GFn-TX-GeD" id="A7p-7i-T8n"/>
                 <outlet property="titleLabel" destination="rrv-95-veh" id="QVk-ay-bEM"/>
-                <outlet property="toggleSwitch" destination="D1l-58-Lyv" id="C25-3i-dDh"/>
             </connections>
         </tableViewCell>
     </objects>
