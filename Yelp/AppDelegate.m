@@ -9,16 +9,22 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-    self.window.rootViewController = [[UINavigationController alloc]
-                                      initWithRootViewController:[[MainViewController alloc] init]];
+    UINavigationController* nav = [[UINavigationController alloc]
+     initWithRootViewController:[[MainViewController alloc] init]];
 
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
+
+    nav.navigationBar.barTintColor = [UIColor colorWithRed:196/255.0f green:18/255.0f blue:0/255.0f alpha:1];
+    nav.navigationBar.tintColor = [UIColor whiteColor];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     return YES;
 }
 
