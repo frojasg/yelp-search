@@ -88,6 +88,7 @@
             break;
         case SwitchCellTypeShowMore:
             self.toggleSwitch.hidden = YES;
+            self.accessoryView = nil;
             self.titleLabel.text = @"See More";
             self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             break;
